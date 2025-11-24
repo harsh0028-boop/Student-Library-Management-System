@@ -1,0 +1,105 @@
+lass Library:
+    def __init__(self, books_dict):
+        # Dictionary for book name and quantity
+        self.books = books_dict.copy()
+        # Nested dictionary for book issuing records
+        self.issued_books = {}
+
+    def display_available_books(self):
+        print("\n" + "-" * 40)
+        print("Current Library Stock:")
+        print(f"{'Book Name':<30} | {'Sets Available'}")
+        print("-" * 40)
+        for book, quantity in self.books.items():
+            print(f"{book:<30} | {quantity}")
+        print("-" * 40)
+
+    def lend_book(self, user_name, book_name):
+        if book_name not in self.books:
+            print(f"\nError: '{book_name}' is not in our library catalog.")
+            return
+        if self.books[book_name] == 0:
+            print(f"\nSorry, all copies of '{book_name}' are currently borrowed.")
+            return
+        # Restrict one copy per user
+        if book_name in self.issued_books and user_name in self.issued_books[book_name]:
+            print(f"\nSorry {user_name}, you already have a copy of '{book_name}'.")
+            return
+        now = datetime.datetime.now()
+        self.issued_books.setdefault(book_name, {})[user_name] = now
+        self.books[book_name] -= 1
+        print(f"\nSuccess! '{book_name}' issued to {user_name}.")
+        print(f"Issued on: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+        print("NOTE: Return within 7 days to avoid a Rs 50 fine.")
+
+    def return_book(self, user_name, book_name):
+        record = self.issued_books.get(book_name, {})
+        issue_date = record.get(user_name, None)
+        if issue_date:
+            return_date = datetime.datetime.now()
+            days_passed = (return_date - issue_date).days
+            print(f"\nProcessing return for: {book_name}")
+            print(f"Returned by: {user_name}")
+            print(f"Days kept: {days_passed}")
+            fine = 50 if days_passed > 7 else 0
+            status = "Overdue! (Limit is 7 days)" if fine else "Returned on time."
+            print(f"Status: {status}")
+            print(f"Fine to Pay: Rs {fine}")
+            del self.issued_books[book_name][user_name]
+            if not self.issued_books[book_name]:
+                del self.issued_books[book_name]
+            self.books[book_name] += 1
+            print("Stock updated. Thank you!")
+        else:
+            print(f"\nError: No record for {user_name} having borrowed '{book_name}'.")
+
+    def add_book(self, book_name, quantity):
+        if quantity <= 0:
+            print("Quantity must be a positive integer.")
+            return
+        self.books[book_name] = self.books.get(book_name, 0) + quantity
+        print(f"\nAdded {quantity} sets of '{book_name}'. Total available: {self.books[book_name]}")
+
+def main():
+    initial_stock = {
+        "Python Programming": 5,
+        "Harry Potter": 3,
+        "Cengage": 10,
+        "Calculus": 2
+    }
+    my_library = Library(initial_stock)
+    print("Welcome to the School Library System")
+    while True:
+        print("\n=== LIBRARY MENU ===")
+        print("1. Display Available Books")
+        print("2. Issue a Book")
+        print("3. Return a Book")
+        print("4. Add New Stock")
+        print("5. Exit")
+        choice = input("Enter choice (1-5): ").strip()
+        if choice == "1":
+            my_library.display_available_books()
+        elif choice == "2":
+            my_library.display_available_books()
+            book = input("Enter Book Name: ").strip()
+            user = input("Enter Student Name: ").strip()
+            my_library.lend_book(user, book)
+        elif choice == "3":
+            book = input("Enter Book Name to return: ").strip()
+            user = input("Enter Student Name: ").strip()
+            my_library.return_book(user, book)
+        elif choice == "4":
+            book = input("Enter Book Name: ").strip()
+            try:
+                qty = int(input("Enter Quantity to add: ").strip())
+                my_library.add_book(book, qty)
+            except ValueError:
+                print("Invalid input. Quantity must be a positive integer.")
+        elif choice == "5":
+            print("Exiting Library System. Have a nice day!")
+            break
+        else:
+            print("Invalid selection. Please try again.")
+
+if __name__ == "__main__":
+    main()
