@@ -2,59 +2,50 @@
 A Student Library Management System automates library operations. It features secure admin/student login, full book catalog management, efficient circulation (checkout/return), automatic fine tracking, and history viewing for users.
 Project Title 
 Student Library Management System 
-Overview of the Project 
-This project is a console-based software designed to simplify the daily work of a 
-librarian. In many schools, library records are still kept in big registers, which makes 
-f
- inding a book or calculating fines very slow and error-prone. My project solves this by 
-automating the entire process. It allows the librarian to digitally track which books are 
-in stock, who has borrowed them, and when they are due. It acts as a central system 
-to ensure books are returned on time and inventory is always up to date. 
-Features 
-1. Live Stock Tracking: The system doesn't just list books; it counts them. If there 
-are 5 copies of "Python Programming" and one is issued, the system instantly 
-updates the available count to 4. 
-2. Issue System: It records the student's name and the exact date and time when a 
-book is borrowed. It also prevents a single student from borrowing multiple 
-copies of the same book. 
-3. Automatic Fine Calculation: This is the key feature. When a book is returned, 
-the system compares the return date with the issue date. If the duration 
-exceeds 7 days, it automatically shows a fine of Rs 50. 
-4. Dynamic Database: We can add new books to the library at any time without 
-restarting the program. 
-5. Validation: It stops users from doing invalid actions, like trying to borrow a book 
-that isn't in stock or returning a book that was never issued. 
-Technologies/Tools Used 
-• Language: Python (Version 3.x) because it is easy to read and has powerful 
-libraries. 
-• Concepts Used: Object-Oriented Programming (Classes & Objects) for 
-structure, and Dictionaries for efficient data storage. 
-• Modules: The datetime module is used to handle real-time date and time 
-tracking for issuing and returning. 
-• IDE: The code was written and tested on VS Code (Visual Studio Code), but it 
-runs on any standard Python IDLE. 
-Steps to Install & Run the Project 
-1. Install Python: Ensure Python is installed on your computer. You can check this 
-by typing python --version in your command prompt. 
-2. Save the Code: Copy the source code and save it as a Python file, for example: 
-Library_management.py. 
-3. Open Terminal: Open your command prompt (cmd) or terminal and navigate to 
-the folder where you saved the file. 
-4. Run the Command: Type python Library_management.py and hit Enter. 
-5. Interact: The menu will appear on the screen, and you can start using the 
-system by entering numbers (1-5). 
-Instructions for Testing 
-To verify that the project works perfectly, follow these test cases: 
-1. Test Availability: Select Option 1 to see the list of books. Note the quantity of 
-"Harry Potter". 
-2. Test Issuing: Select Option 2. Enter your name and "Harry Potter". You will see a 
-success message. Check the list again (Option 1)—the quantity should be one 
-less. 
-3. Test Out-of-Stock: Try to issue a book that has 0 quantity. The system should 
-politely refuse. 
-4. Test Returning & Fine: Select Option 3. Enter the same name and book title. 
-o Note: Since we can't wait 7 days in real-time during a demo, you can 
-verify the logic by temporarily changing the code limit from > 7 to > 0 
-seconds/days to see the fine message appear immediately. 
-5. Test Adding Stock: Select Option 4, add a new book name and quantity, and 
-check Option 1 to see if it appears in the list. 
+This console-based software streamlines daily librarian tasks, replacing traditional manual record-keeping with an efficient digital system. Many school libraries still use bulky paper registers, making it difficult and error-prone to search for books or calculate fines. This project automates these processes, enabling the librarian to easily track which books are in stock, who has borrowed them, and their due dates. It acts as a centralized system ensuring timely book returns and maintaining up-to-date inventory.
+
+Key Features:
+
+Live Stock Tracking: The system maintains an accurate count of each book’s copies. For example, if there are 5 copies of Python Programming and one is issued, the available count instantly updates to 4.
+
+Issue Management: It records the student’s name along with the exact date and time when a book is borrowed. It also prevents a single student from borrowing multiple copies of the same book simultaneously.
+
+Automatic Fine Calculation: Upon return, the system compares the return date with the issue date. If the book is kept beyond 7 days, it automatically calculates and displays a fine of Rs 50.
+
+Dynamic Database: New books can be added to the catalog at any time without restarting the program.
+
+Validation Checks: The system prevents invalid operations, such as issuing out-of-stock books or returning books that were never borrowed.
+
+Technologies & Tools Used:
+
+Programming Language: Python 3.x, chosen for its readability and extensive libraries.
+
+Core Concepts: Object-Oriented Programming (Classes and Objects) for modularity and dictionaries for efficient data handling.
+
+Modules: The datetime module manages real-time date and time tracking for issue and return operations.
+
+IDE: Developed and tested using Visual Studio Code but runs on any standard Python interpreter.
+
+Installation & Execution Steps:
+
+Ensure Python is installed by running python --version in your command prompt or terminal.
+
+Save the source code as Library_management.py.
+
+Open a terminal or command prompt and navigate to the saved file’s directory.
+
+Run the program using the command: python Library_management.py.
+
+Follow the on-screen menu by entering numbers (1-5) to interact with the system.
+
+Testing Instructions:
+
+Check Availability: Use Option 1 to display all books and their quantities. Note the count for “Harry Potter.”
+
+Issue a Book: Choose Option 2 and borrow “Harry Potter” under your name. Confirm the quantity decreases by one using Option 1.
+
+Test Out-of-Stock Handling: Attempt to issue a book with zero quantity; the system should deny the request politely.
+
+Return & Fine Simulation: Use Option 3 to return the book. Since waiting 7 days in real-time isn’t practical for demos, temporarily modify the code to impose the fine immediately (set the overdue limit to 0) to observe the fine calculation.
+
+Add New Stock: Select Option 4 to add new books and verify by listing them with Option 1
